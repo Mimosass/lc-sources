@@ -69,3 +69,12 @@ repos:
     asset_pattern: "*.dylib,*.framework,*.zip"
     tweak_scope: global
     note: "导入 LiveContainer Tweaks 页 → 签名 → 全局注入生效"
+
+   - owner: SideStore
+    repo: SideStore
+    name: SideStore Nightly
+    bundle_id: io.sidestore.SideStore.nightly
+    icon: https://raw.githubusercontent.com/SideStore/SideStore/main/Assets/AppIcon.png
+    stable: skip          # 不生成稳定版条目
+    nightly: nightly
+    asset_pattern: "SideStore.ipa"
