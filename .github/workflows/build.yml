@@ -18,9 +18,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5 # 升级到 v5 支持 Node 24
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v6 # 升级到 v6 支持 Node 24
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -32,7 +32,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python build_sources.py
 
-      - name: 防止 Jekyll 吃掉下划线文件
+      - name: 防止 Jekyll 忽略
         run: touch public/.nojekyll
 
       - name: 部署到 gh-pages
