@@ -1,0 +1,13 @@
+# 以后加软件：大部分情况只写 owner + repo 两行就够了
+repos:
+  - owner: GoldenNugget-Team
+    repo: GoldenNugget-mobile
+    name: GoldenNugget Mobile
+    bundle_id: com.goldennugget.mobile
+    icon: https://raw.githubusercontent.com/GoldenNugget-Team/GoldenNugget-mobile/main/layout/Applications/GoldenNuggetMobile.app/AppIcon60x60@2x.png
+    stable: newest          # 走 releases 列表，取最新正式版（兼容编号 tag）
+    nightly: prerelease     # 取最新 prerelease；没有就不出
+
+  # 最简写法示例（只写两行也能跑）
+  # - owner: khanhduytran0
+  #   repo: LiveContainer
