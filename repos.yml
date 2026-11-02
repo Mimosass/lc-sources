@@ -1,6 +1,6 @@
 # 以后加软件：大部分情况只写 owner + repo 两行就够了
 repos:
-  # —— GoldenNugget ——
+  # —— 1. GoldenNugget 正式 App ——
   - owner: GoldenNugget-Team
     repo: GoldenNugget-mobile
     name: GoldenNugget Mobile
@@ -9,7 +9,7 @@ repos:
     stable: newest
     nightly: prerelease
 
-  # —— Husk（完整版）——
+  # —— 2. Husk 正式 App ——
   - owner: Leviidev
     repo: Husk
     name: Husk
@@ -17,9 +17,9 @@ repos:
     icon: https://raw.githubusercontent.com/Leviidev/Husk/main/icon.png
     stable: newest
     nightly: prerelease
-    asset_pattern: "*.ipa"
 
-- owner: dompling
+  # —— 3. LC-SS dylib 插件 ——
+  - owner: dompling
     repo: LC-SS-widget-export
     name: LC-SS Widget & FloatingMenu
     type: tweak
@@ -28,5 +28,5 @@ repos:
     stable: newest
     nightly: prerelease
     asset_pattern: "*.dylib,*.framework,*.zip"
-    tweak_scope: global     # global=全局注入；app=需手动绑定
-    note: "导入后在 LiveContainer Tweaks 页签名，LCFloatingMenu 全局生效"
+    tweak_scope: global
+    note: "导入 LiveContainer Tweaks 页签名后生效，LCFloatingMenu 全局注入"
