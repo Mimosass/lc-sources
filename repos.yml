@@ -5,16 +5,13 @@
 # ============================================================
 
 repos:
-
-  # ──────────────── 基础工具 App ────────────────
-
   - owner: GoldenNugget-Team
     repo: GoldenNugget-mobile
     name: GoldenNugget Mobile
     bundle_id: com.goldennugget.mobile
     icon: https://raw.githubusercontent.com/GoldenNugget-Team/GoldenNugget-mobile/main/layout/Applications/GoldenNuggetMobile.app/AppIcon60x60@2x.png
     stable: newest
-    nightly: nightly          # 走 nightly tag
+    nightly: nightly
     asset_pattern: "*.ipa"
 
   - owner: Leviidev
@@ -26,16 +23,14 @@ repos:
     nightly: prerelease
     asset_pattern: "*.ipa"
 
-  # ──────────────── 核心运行环境 ────────────────
-
   - owner: LiveContainer
     repo: LiveContainer
     name: LiveContainer
     bundle_id: com.kdt.livecontainer
     icon: https://raw.githubusercontent.com/LiveContainer/LiveContainer/main/screenshots/livecontainer_icon.png
-    stable: latest             # 官方 latest 接口最稳
-    nightly: nightly           # 官方 nightly tag
-    asset_pattern: "LiveContainer.ipa"   # 只要独立版，不要 +SideStore 那个
+    stable: latest
+    nightly: nightly
+    asset_pattern: "LiveContainer.ipa"
 
   - owner: LiveContainer
     repo: LiveContainer
@@ -44,8 +39,7 @@ repos:
     icon: https://raw.githubusercontent.com/LiveContainer/LiveContainer/main/screenshots/livecontainer_icon.png
     stable: latest
     nightly: nightly
-    asset_pattern: "LiveContainer+SideStore.ipa"   # 只要整合版
-    alias: true               # 同一个仓库拆成两个条目
+    asset_pattern: "LiveContainer+SideStore.ipa"
 
   - owner: SideStore
     repo: SideStore
@@ -55,8 +49,6 @@ repos:
     stable: latest
     nightly: nightly
     asset_pattern: "SideStore.ipa"
-
-  # ──────────────── dylib 插件 ────────────────
 
   - owner: dompling
     repo: LC-SS-widget-export
@@ -69,12 +61,3 @@ repos:
     asset_pattern: "*.dylib,*.framework,*.zip"
     tweak_scope: global
     note: "导入 LiveContainer Tweaks 页 → 签名 → 全局注入生效"
-
-   - owner: SideStore
-    repo: SideStore
-    name: SideStore Nightly
-    bundle_id: io.sidestore.SideStore.nightly
-    icon: https://raw.githubusercontent.com/SideStore/SideStore/main/Assets/AppIcon.png
-    stable: skip          # 不生成稳定版条目
-    nightly: nightly
-    asset_pattern: "SideStore.ipa"
