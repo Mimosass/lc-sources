@@ -1,9 +1,3 @@
-# ============================================================
-# 仓库清单
-# type 不填 = 普通 IPA App（默认）
-# type: tweak = dylib/framework 插件
-# ============================================================
-
 repos:
   - owner: GoldenNugget-Team
     repo: GoldenNugget-mobile
@@ -49,6 +43,15 @@ repos:
     stable: latest
     nightly: nightly
     asset_pattern: "SideStore.ipa"
+
+  - owner: Lakr233
+    repo: Asspp
+    name: Asspp
+    bundle_id: wiki.qaq.Asspp
+    icon: https://raw.githubusercontent.com/Lakr233/Asspp/main/Assets/AppIcon.png
+    stable: newest
+    nightly: prerelease
+    asset_pattern: "Asspp.ipa"
 
   - owner: dompling
     repo: LC-SS-widget-export
