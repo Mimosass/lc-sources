@@ -1,0 +1,86 @@
+{
+  "name": "Mimosass LC 正式源",
+  "identifier": "me.mimosass.lc.stable",
+  "subtitle": "自动同步各仓库最新正式版",
+  "tintColor": "#007AFF",
+  "apps": [
+    {
+      "name": "GoldenNugget Mobile",
+      "bundleIdentifier": "com.goldennugget.mobile",
+      "developerName": "GoldenNugget-Team",
+      "version": "9.7.5",
+      "versionDate": "2026-11-03",
+      "versionDescription": "# GoldenNugget Mobile 9.7.5\r\n## Fixes\r\nmake «Select Pairing File» and «Pair Wirelessly» not be in same VStack",
+      "downloadURL": "https://github.com/GoldenNugget-Team/GoldenNugget-mobile/releases/download/9.7.5/GoldenNuggetMobile.ipa",
+      "size": 14891809,
+      "iconURL": "https://raw.githubusercontent.com/GoldenNugget-Team/GoldenNugget-mobile/main/layout/Applications/GoldenNuggetMobile.app/AppIcon60x60@2x.png",
+      "localizedDescription": "Stable build from GoldenNugget-Team/GoldenNugget-mobile",
+      "tintColor": "#007AFF"
+    },
+    {
+      "name": "Husk",
+      "bundleIdentifier": "dev.levii.husk",
+      "developerName": "Leviidev",
+      "version": "3.4",
+      "versionDate": "2026-11-05",
+      "versionDescription": "## What's new?\n\n3.4 is a compatibility release. About 97% of the 472 F-Droid apps we test now run, up from 85%. On the 169 Play Store apps we test, about 90% run, not counting apps with anti-tamper or fraud protection, which Husk doesn't try to bypass. All of these numbers are from testing on a Mac.\n\n### More Android apps\n- Microsoft Word opens (Excel and PowerPoint share its libraries)\n- Slack, Gmail, Teams, Deezer, Flipboard and Picsart get past the crashes that stopped them\n- More engines and frameworks start: React Native's new architecture, Qt 6 / QML, and apps using JavaScriptCore\n- libGDX and other OpenGL apps draw again (3.3 broke these)\n- Apps that keep secrets in Android's secure key store work better\n- Apps with big bundled databases open\n- UPnP and network discovery apps can st",
+      "downloadURL": "https://github.com/Leviidev/Husk/releases/download/3.4/Husk.ipa",
+      "size": 142303569,
+      "iconURL": "https://raw.githubusercontent.com/Leviidev/Husk/main/icon.png",
+      "localizedDescription": "Stable build from Leviidev/Husk",
+      "tintColor": "#007AFF"
+    },
+    {
+      "name": "LiveContainer",
+      "bundleIdentifier": "com.kdt.livecontainer",
+      "developerName": "LiveContainer",
+      "version": "3.8.0",
+      "versionDate": "2026-07-17",
+      "versionDescription": "# LiveContainer 3.8.0\r\n\r\n> [!Warning]\r\n> The standalone version requires **SideStore 0.6.2+** or **AltStore 2.2.1+** for installation.\r\n> To install LiveContainer with built-in SideStore (`LiveContainer+SideStore.ipa`), please use [Impactor](https://github.com/khcrysalis/Impactor) or [iloader](https://github.com/nab138/iloader). See [our installation guide](https://livecontainer.github.io/docs/installation/lc_sidestore) for details.\r\n\r\n# New Features\r\n\r\n## Storage Management\r\n\r\n- Added a new storage management view with a breakdown of app bundles, containers, temporary files, app group data, tweaks, and other files. (Hidden apps' size is included in \"other\" section until unlocked)\r\n- Added per-app storage details, including app bundle size, container sizes, and last-used date.\r\n- Added act",
+      "downloadURL": "https://github.com/LiveContainer/LiveContainer/releases/download/3.8.0/LiveContainer.ipa",
+      "size": 4707271,
+      "iconURL": "https://raw.githubusercontent.com/LiveContainer/LiveContainer/main/screenshots/livecontainer_icon.png",
+      "localizedDescription": "Stable build from LiveContainer/LiveContainer",
+      "tintColor": "#007AFF"
+    },
+    {
+      "name": "LiveContainer + SideStore",
+      "bundleIdentifier": "com.kdt.livecontainer.sidestore",
+      "developerName": "LiveContainer",
+      "version": "3.8.0",
+      "versionDate": "2026-07-17",
+      "versionDescription": "# LiveContainer 3.8.0\r\n\r\n> [!Warning]\r\n> The standalone version requires **SideStore 0.6.2+** or **AltStore 2.2.1+** for installation.\r\n> To install LiveContainer with built-in SideStore (`LiveContainer+SideStore.ipa`), please use [Impactor](https://github.com/khcrysalis/Impactor) or [iloader](https://github.com/nab138/iloader). See [our installation guide](https://livecontainer.github.io/docs/installation/lc_sidestore) for details.\r\n\r\n# New Features\r\n\r\n## Storage Management\r\n\r\n- Added a new storage management view with a breakdown of app bundles, containers, temporary files, app group data, tweaks, and other files. (Hidden apps' size is included in \"other\" section until unlocked)\r\n- Added per-app storage details, including app bundle size, container sizes, and last-used date.\r\n- Added act",
+      "downloadURL": "https://github.com/LiveContainer/LiveContainer/releases/download/3.8.0/LiveContainer%2BSideStore.ipa",
+      "size": 35403538,
+      "iconURL": "https://raw.githubusercontent.com/LiveContainer/LiveContainer/main/screenshots/livecontainer_icon.png",
+      "localizedDescription": "Stable build from LiveContainer/LiveContainer",
+      "tintColor": "#007AFF"
+    },
+    {
+      "name": "SideStore",
+      "bundleIdentifier": "com.sidestore.SideStore",
+      "developerName": "SideStore",
+      "version": "0.7.0-alpha",
+      "versionDate": "2026-09-15",
+      "versionDescription": "## Build Info\r\n\r\nBuilt at (UTC): `Fri Sep 11 21:25:58 2026`\r\nBuilt at (UTC date): `2026-09-11`\r\nCommit SHA: `6032424a0e56c1c319762e786099bdd9186a238b`\r\nVersion: `0.7.0-20260911.328+6032424a`\r\n\r\n#### What's Changed:\r\n- **fixes for 503 during sign-in**: There were some changes from apple server side which broke 0.6.4 and prior versions and prevent them from signing into sidestore. This temporary version addresses the sign-in issue with 503 status code\r\n\r\n#### Full Changelog: [0.6.4...0.7.0-alpha](https://github.com/SideStore/SideStore/compare/0.6.4...0.7.0-alpha)",
+      "downloadURL": "https://github.com/SideStore/SideStore/releases/download/0.7.0-alpha/SideStore.ipa",
+      "size": 27770821,
+      "iconURL": "https://raw.githubusercontent.com/SideStore/SideStore/main/Assets/AppIcon.png",
+      "localizedDescription": "Stable build from SideStore/SideStore",
+      "tintColor": "#007AFF"
+    },
+    {
+      "name": "Asspp",
+      "bundleIdentifier": "wiki.qaq.Asspp",
+      "developerName": "Lakr233",
+      "version": "4.2.2",
+      "versionDate": "2026-10-20",
+      "versionDescription": "## Changes\n\n- Recover downloads when Apple returns an empty HTTP 500 by retrying the version-pinned request through the bag’s update endpoint.\n- Update ApplePackage to 2.0.3 with Swift 6.2 compatibility fixes.\n- Report Keychain save failures before completing login, and preserve stored data when loading fails.\n- Improve empty account layout, editable device identifiers, and account table column widths.\n- Remove personal metadata from bundled installation certificates and omit the CA private key.\n- Explicitly clear development teams for release builds and check packaged artifacts before publication.\n\n## Installation certificate\n\nThe local installation CA was replaced to remove personal metadata. If you use OTA installation, install and trust the new certificate from Settings after updating.",
+      "downloadURL": "https://github.com/Lakr233/Asspp/releases/download/4.2.2/Asspp.ipa",
+      "size": 16458246,
+      "iconURL": "https://raw.githubusercontent.com/Lakr233/Asspp/main/Assets/AppIcon.png",
+      "localizedDescription": "Stable build from Lakr233/Asspp",
+      "tintColor": "#007AFF"
+    }
+  ]
+}
