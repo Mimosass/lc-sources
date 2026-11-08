@@ -64,3 +64,23 @@ repos:
     asset_pattern: "*.dylib,*.framework,*.zip"
     tweak_scope: global
     note: "导入 LiveContainer Tweaks 页 → 签名 → 全局注入生效"
+
+  - owner: Mimosass
+    repo: lc-sources
+    name: SideStore 简体中文
+    bundle_id: com.sidestore.SideStore.zh
+    icon: https://raw.githubusercontent.com/SideStore/SideStore/main/Assets/AppIcon.png
+    stable: none
+    nightly: prerelease
+    tag_pattern: "zh-sidestore-nightly"
+    asset_pattern: "SideStore-zh-unsigned.ipa"
+
+  - owner: Mimosass
+    repo: lc-sources
+    name: LiveContainer 简体中文
+    bundle_id: com.kdt.livecontainer.zh
+    icon: https://raw.githubusercontent.com/LiveContainer/LiveContainer/main/screenshots/livecontainer_icon.png
+    stable: none
+    nightly: prerelease
+    tag_pattern: "zh-livecontainer-nightly"
+    asset_pattern: "LiveContainer-zh-unsigned.ipa"

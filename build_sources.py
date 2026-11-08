@@ -26,6 +26,7 @@ def match_asset(rel, patterns):
                         "name": a["name"],
                         "url": a["browser_download_url"],
                         "size": a["size"],
+                        "updated_at": a.get("updated_at"),
                     })
                     seen.add(a["name"])
                 break
@@ -67,6 +68,12 @@ def fetch_latest(owner, repo):
     except Exception:
         return None
 
+def asset_date(rel, assets):
+    """构建日期取资源上传时间——moving tag（如 nightly）的 published_at 是 tag 首次创建时间，可能是几年前。"""
+    dates = [a["updated_at"] for a in assets if a.get("updated_at")]
+    return (max(dates) if dates else (rel.get("published_at") or ""))[:10]
+
+
 def build_app_entry(r, rel, assets, suffix=""):
     ipa = assets[0]
     base_bid = r.get("bundle_id", f"io.github.{r['owner']}.{r['repo']}")
@@ -75,7 +82,7 @@ def build_app_entry(r, rel, assets, suffix=""):
         "bundleIdentifier": base_bid + (".nightly" if "Nightly" in suffix else ""),
         "developerName": r["owner"],
         "version": rel["tag_name"].lstrip("v"),
-        "versionDate": rel["published_at"][:10],
+        "versionDate": asset_date(rel, assets),
         "versionDescription": (rel.get("body") or "")[:800],
         "downloadURL": ipa["url"],
         "size": ipa["size"],
@@ -90,7 +97,7 @@ def build_tweak_entry(r, rel, assets, suffix=""):
         "bundleIdentifier": r.get("bundle_id", f"io.github.{r['owner']}.{r['repo']}") + (".nightly" if suffix else ""),
         "developerName": r["owner"],
         "version": rel["tag_name"].lstrip("v"),
-        "versionDate": rel["published_at"][:10],
+        "versionDate": asset_date(rel, assets),
         "versionDescription": (rel.get("body") or "Nightly build")[:800],
         "iconURL": r.get("icon", ""),
         "localizedDescription": r.get("note", "LiveContainer dylib tweak"),
