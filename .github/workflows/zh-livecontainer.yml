@@ -1,0 +1,121 @@
+name: 每夜构建：LiveContainer 简体中文
+
+# 每天 @CRONTEXT@：拉上游最新代码 + 注入本仓库简体中文 overlay（zh/livecontainer），编译未签名 IPA，
+# 发布到 tag `zh-livecontainer-nightly` 的预发布 Release（每天覆盖）。lc-sources 的 nightly.json 会自动收录它。
+on:
+  schedule:
+    - cron: '30 18 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/zh-livecontainer.yml'
+      - 'zh/livecontainer/**'
+      - 'zh/scripts/**'
+
+concurrency:
+  group: zh-livecontainer-nightly
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+env:
+  APP_NAME: LiveContainer
+  IPA_NAME: LiveContainer-zh-unsigned.ipa
+  UPSTREAM_REPO: LiveContainer/LiveContainer
+  UPSTREAM_REF: main
+  RELEASE_TAG: zh-livecontainer-nightly
+
+jobs:
+  build:
+    name: Build LiveContainer (unsigned, zh-Hans)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout upstream
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.UPSTREAM_REPO }}
+          ref: ${{ env.UPSTREAM_REF }}
+          path: src
+          fetch-depth: 1
+          submodules: recursive
+
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          path: repo
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1.6.0
+        with:
+          xcode-version: "26.2"
+
+      - name: Apply zh-Hans overlay
+        run: |
+          python3 repo/zh/scripts/apply_zh_livecontainer.py \
+            --root src \
+            --overlay repo/zh/livecontainer \
+            --report "$RUNNER_TEMP/zh-report.json"
+          cat "$RUNNER_TEMP/zh-report.json"
+
+      - name: Build
+        run: |
+          set -o pipefail
+          for attempt in 1 2 3; do
+            echo "=== xcodebuild attempt $attempt ==="
+            if xcodebuild build \
+              -project src/LiveContainer.xcodeproj \
+              -scheme LiveContainer \
+              -sdk iphoneos \
+              -configuration Release \
+              -derivedDataPath "$RUNNER_TEMP/build" \
+              CODE_SIGNING_ALLOWED=NO \
+              CODE_SIGNING_REQUIRED=NO \
+              AD_HOC_CODE_SIGNING_ALLOWED=YES \
+              DEVELOPMENT_TEAM=AAAAA11111 \
+              -quiet; then
+              echo "BUILD SUCCEEDED (attempt $attempt)"
+              break
+            fi
+            echo "attempt $attempt failed (network/SPM flake possible)"
+            if [ "$attempt" = "3" ]; then echo "BUILD FAILED after 3 attempts"; exit 1; fi
+            sleep 30
+          done
+
+      - name: Package IPA
+        run: |
+          APP="$RUNNER_TEMP/build/Build/Products/Release-iphoneos/LiveContainer.app"
+          test -d "$APP" || { echo "LiveContainer.app not found"; exit 1; }
+          mkdir -p "$RUNNER_TEMP/Payload"
+          cp -R "$APP" "$RUNNER_TEMP/Payload/"
+          cd "$RUNNER_TEMP"
+          zip -qry "$IPA_NAME" Payload
+
+      - name: Verify zh-Hans resources
+        run: |
+          APP="$RUNNER_TEMP/build/Build/Products/Release-iphoneos/LiveContainer.app"
+          test -f "$APP/zh-Hans.lproj/Localizable.strings" || { echo "missing zh-Hans Localizable.strings"; exit 1; }
+          plutil -convert xml1 -o "$RUNNER_TEMP/zh.xml" "$APP/zh-Hans.lproj/Localizable.strings"
+          KEYS=$(grep -c "<key>" "$RUNNER_TEMP/zh.xml")
+          echo "zh-Hans keys: $KEYS"
+          test "$KEYS" -gt 300 || { echo "zh-Hans key count too low"; exit 1; }
+
+      - name: Publish nightly release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          UPSTREAM_SHA="$(git -C src rev-parse --short=8 HEAD)"
+          TODAY="$(TZ=Asia/Shanghai date +%Y-%m-%d)"
+          python3 repo/zh/scripts/make_notes.py "$RUNNER_TEMP/zh-report.json" \
+            "$UPSTREAM_REPO@$UPSTREAM_REF" "$UPSTREAM_SHA" "$TODAY" > "$RUNNER_TEMP/notes.md"
+          cat "$RUNNER_TEMP/notes.md"
+          TITLE="LiveContainer 简体中文 每夜版"
+          if gh release view "$RELEASE_TAG" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" "$RUNNER_TEMP/$IPA_NAME" -R "$GITHUB_REPOSITORY" --clobber
+            gh release edit "$RELEASE_TAG" -R "$GITHUB_REPOSITORY" --title "$TITLE" \
+              --notes-file "$RUNNER_TEMP/notes.md"
+          else
+            gh release create "$RELEASE_TAG" "$RUNNER_TEMP/$IPA_NAME" -R "$GITHUB_REPOSITORY" \
+              --title "$TITLE" --notes-file "$RUNNER_TEMP/notes.md" --prerelease --latest=false
+          fi
