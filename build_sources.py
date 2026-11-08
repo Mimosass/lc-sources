@@ -1,4 +1,4 @@
-import os, json, yaml, requests, fnmatch
+import os, json, yaml, requests, fnmatch, datetime
 from packaging.version import parse as vparse, InvalidVersion
 
 with open("repos.yml", "r", encoding="utf-8") as f:
@@ -68,10 +68,25 @@ def fetch_latest(owner, repo):
     except Exception:
         return None
 
-def asset_date(rel, assets):
-    """构建日期取资源上传时间——moving tag（如 nightly）的 published_at 是 tag 首次创建时间，可能是几年前。"""
+BJT = datetime.timezone(datetime.timedelta(hours=8))
+
+def asset_datetime(rel, assets):
+    """构建时间取资源上传时间——moving tag（如 nightly）的 published_at 是 tag 首次创建时间，可能是几年前。换算到北京时间。"""
     dates = [a["updated_at"] for a in assets if a.get("updated_at")]
-    return (max(dates) if dates else (rel.get("published_at") or ""))[:10]
+    ts = max(dates) if dates else (rel.get("published_at") or "")
+    if not ts:
+        return None
+    return datetime.datetime.fromisoformat(ts.replace("Z", "+00:00")).astimezone(BJT)
+
+def asset_date(rel, assets):
+    """AltStore 的 versionDate 用 yyyy-MM-dd（北京时间）。"""
+    dt = asset_datetime(rel, assets)
+    return dt.strftime("%Y-%m-%d") if dt else ""
+
+def asset_version_date(rel, assets):
+    """每夜版把版本号本身写成日期，方便在客户端一眼分辨新旧。"""
+    dt = asset_datetime(rel, assets)
+    return dt.strftime("%Y.%m.%d") if dt else ""
 
 
 def build_app_entry(r, rel, assets, suffix=""):
@@ -81,7 +96,7 @@ def build_app_entry(r, rel, assets, suffix=""):
         "name": r.get("name", r["repo"]) + suffix,
         "bundleIdentifier": base_bid,
         "developerName": r["owner"],
-        "version": rel["tag_name"].lstrip("v"),
+        "version": asset_version_date(rel, assets) if r.get("version") == "date" else rel["tag_name"].lstrip("v"),
         "versionDate": asset_date(rel, assets),
         "versionDescription": (rel.get("body") or "")[:800],
         "downloadURL": ipa["url"],
