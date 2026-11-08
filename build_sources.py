@@ -79,7 +79,7 @@ def build_app_entry(r, rel, assets, suffix=""):
     base_bid = r.get("bundle_id", f"io.github.{r['owner']}.{r['repo']}")
     return {
         "name": r.get("name", r["repo"]) + suffix,
-        "bundleIdentifier": base_bid + (".nightly" if "Nightly" in suffix else ""),
+        "bundleIdentifier": base_bid,
         "developerName": r["owner"],
         "version": rel["tag_name"].lstrip("v"),
         "versionDate": asset_date(rel, assets),
@@ -94,7 +94,7 @@ def build_app_entry(r, rel, assets, suffix=""):
 def build_tweak_entry(r, rel, assets, suffix=""):
     return {
         "name": r.get("name", r["repo"]) + suffix,
-        "bundleIdentifier": r.get("bundle_id", f"io.github.{r['owner']}.{r['repo']}") + (".nightly" if suffix else ""),
+        "bundleIdentifier": r.get("bundle_id", f"io.github.{r['owner']}.{r['repo']}"),
         "developerName": r["owner"],
         "version": rel["tag_name"].lstrip("v"),
         "versionDate": asset_date(rel, assets),

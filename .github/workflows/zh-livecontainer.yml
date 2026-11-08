@@ -74,6 +74,7 @@ jobs:
               CODE_SIGNING_REQUIRED=NO \
               AD_HOC_CODE_SIGNING_ALLOWED=YES \
               DEVELOPMENT_TEAM=AAAAA11111 \
+              LIVECONTAINER_BUNDLE_IDENTIFIER=com.kdt.livecontainer.zh \
               -quiet; then
               echo "BUILD SUCCEEDED (attempt $attempt)"
               break
@@ -100,6 +101,13 @@ jobs:
           KEYS=$(grep -c "<key>" "$RUNNER_TEMP/zh.xml")
           echo "zh-Hans keys: $KEYS"
           test "$KEYS" -gt 300 || { echo "zh-Hans key count too low"; exit 1; }
+
+      - name: Verify bundle identifier
+        run: |
+          APP="$RUNNER_TEMP/build/Build/Products/Release-iphoneos/LiveContainer.app"
+          BID=$(plutil -extract CFBundleIdentifier raw "$APP/Info.plist")
+          echo "CFBundleIdentifier: $BID"
+          test "$BID" = "com.kdt.livecontainer.zh" || { echo "bundle id 与源条目不一致"; exit 1; }
 
       - name: Publish nightly release
         env:

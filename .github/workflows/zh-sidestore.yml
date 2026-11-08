@@ -74,7 +74,7 @@ jobs:
               CODE_SIGNING_REQUIRED=NO \
               AD_HOC_CODE_SIGNING_ALLOWED=YES \
               DEVELOPMENT_TEAM=XYZ0123456 \
-              ORG_IDENTIFIER=com.SideStore \
+              ORG_IDENTIFIER=com.SideStore.zh \
               -quiet; then
               echo "BUILD SUCCEEDED (attempt $attempt)"
               break
@@ -106,6 +106,15 @@ jobs:
             plutil -convert xml1 -o "$RUNNER_TEMP/widget.xml" "$WIDGET"
             echo "widget zh-Hans keys: $(grep -c '<key>' "$RUNNER_TEMP/widget.xml")"
           fi
+
+      - name: Verify bundle identifier
+        run: |
+          APP="$RUNNER_TEMP/build/Build/Products/Release-iphoneos/SideStore.app"
+          BID=$(plutil -extract CFBundleIdentifier raw "$APP/Info.plist")
+          echo "CFBundleIdentifier: $BID"
+          test "$BID" = "com.SideStore.zh.SideStore" || { echo "bundle id 与源条目不一致"; exit 1; }
+          APPEX="$APP/PlugIns/AltWidgetExtension.appex/Info.plist"
+          if [ -f "$APPEX" ]; then echo "widget id: $(plutil -extract CFBundleIdentifier raw "$APPEX")"; fi
 
       - name: Publish nightly release
         env:

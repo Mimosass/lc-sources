@@ -68,7 +68,7 @@ repos:
   - owner: Mimosass
     repo: lc-sources
     name: SideStore 简体中文
-    bundle_id: com.sidestore.SideStore.zh
+    bundle_id: com.SideStore.zh.SideStore
     icon: https://raw.githubusercontent.com/SideStore/SideStore/main/Assets/AppIcon.png
     stable: none
     nightly: prerelease
