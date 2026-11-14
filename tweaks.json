@@ -1,0 +1,56 @@
+{
+  "name": "Mimosass LC 插件源",
+  "identifier": "me.mimosass.lc.tweaks",
+  "subtitle": "dylib / framework 插件下载",
+  "tintColor": "#AF52DE",
+  "tweaks": [
+    {
+      "name": "LC-SS Widget & FloatingMenu",
+      "bundleIdentifier": "com.dompling.lcss",
+      "developerName": "dompling",
+      "version": "1.0.36",
+      "versionDate": "2026-11-07",
+      "versionDescription": "扩大关闭按钮点击热区：\n1. 普通模式与精简模式下，关闭 App 的叉叉按钮点击区域向四周各扩大 8pt，更容易点中。\n2. 叉叉图标视觉尺寸保持不变，仅扩大可点击判定区域。\n",
+      "iconURL": "https://raw.githubusercontent.com/dompling/LC-SS-widget-export/main/screenshots/icon.png",
+      "localizedDescription": "导入 LiveContainer Tweaks 页 → 签名 → 全局注入生效",
+      "tweakScope": "global",
+      "installHint": "Tweaks 页导入 → 签名 → 绑定 App",
+      "assets": [
+        {
+          "name": "LCFloatingMenu.dylib",
+          "url": "https://github.com/dompling/LC-SS-widget-export/releases/download/1.0.36/LCFloatingMenu.dylib",
+          "size": 881416,
+          "updated_at": "2026-11-07T08:41:09Z"
+        }
+      ],
+      "tintColor": "#AF52DE"
+    },
+    {
+      "name": "LC-SS Widget & FloatingMenu (Nightly)",
+      "bundleIdentifier": "com.dompling.lcss",
+      "developerName": "dompling",
+      "version": "fm-latest",
+      "versionDate": "2026-11-07",
+      "versionDescription": "FM_VERSION=1.0.36\nFM_COMMIT=8f9cbe2905e036a07b847f2a46c9ac67408735dd\nFM_TAG=1.0.36\n",
+      "iconURL": "https://raw.githubusercontent.com/dompling/LC-SS-widget-export/main/screenshots/icon.png",
+      "localizedDescription": "导入 LiveContainer Tweaks 页 → 签名 → 全局注入生效",
+      "tweakScope": "global",
+      "installHint": "Tweaks 页导入 → 签名 → 绑定 App",
+      "assets": [
+        {
+          "name": "LCFloatingMenu-latest.dylib",
+          "url": "https://github.com/dompling/LC-SS-widget-export/releases/download/fm-latest/LCFloatingMenu-latest.dylib",
+          "size": 511288,
+          "updated_at": "2026-10-28T05:00:51Z"
+        },
+        {
+          "name": "LCFloatingMenu.dylib",
+          "url": "https://github.com/dompling/LC-SS-widget-export/releases/download/fm-latest/LCFloatingMenu.dylib",
+          "size": 881416,
+          "updated_at": "2026-11-07T08:41:11Z"
+        }
+      ],
+      "tintColor": "#AF52DE"
+    }
+  ]
+}
