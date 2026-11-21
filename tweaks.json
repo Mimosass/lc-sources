@@ -1,0 +1,50 @@
+{
+  "name": "Mimosass LC 插件源",
+  "identifier": "me.mimosass.lc.tweaks",
+  "subtitle": "dylib / framework 插件下载",
+  "tintColor": "#AF52DE",
+  "tweaks": [
+    {
+      "name": "LC-SS Widget & FloatingMenu",
+      "bundleIdentifier": "com.dompling.lcss",
+      "developerName": "dompling",
+      "version": "1.0.48",
+      "versionDate": "2026-11-20",
+      "versionDescription": "### 更新内容\n\n1. 修复 iOS 27.x 自适应多任务 Dock 图标偶发不显示的问题，将图标从可变毛玻璃内容层中分离。\n2. 优化多任务数量较多时的切换流畅度：减少不可见任务的场景几何更新和动画开销。\n3. 新增「仅当前任务显示实时画面」开关（默认关闭）；启用后仅当前 App 保留实时预览，其他任务显示居中图标。\n4. 修复静态图标与实时窗口之间的层级遮挡，保持原有卡片位置和排序。\n5. 同步静态图标卡片的展开、收起、隐藏和切换动画，避免残留。\n6. 精简设置页实时预览说明文字。\n\n本次为 LCFloatingMenu 1.0.48 正式版。首次手动导入 dylib 仍需在 LC+SS 中重新签名。iOS 27.3 真机效果请以实际使用情况为准。\n",
+      "iconURL": "https://raw.githubusercontent.com/dompling/LC-SS-widget-export/main/screenshots/icon.png",
+      "localizedDescription": "导入 LiveContainer Tweaks 页 → 签名 → 全局注入生效",
+      "tweakScope": "global",
+      "installHint": "Tweaks 页导入 → 签名 → 绑定 App",
+      "assets": [
+        {
+          "name": "LCFloatingMenu.dylib",
+          "url": "https://github.com/dompling/LC-SS-widget-export/releases/download/1.0.48/LCFloatingMenu.dylib",
+          "size": 1115672,
+          "updated_at": "2026-11-20T14:19:56Z"
+        }
+      ],
+      "tintColor": "#AF52DE"
+    },
+    {
+      "name": "LC-SS Widget & FloatingMenu (Nightly)",
+      "bundleIdentifier": "com.dompling.lcss",
+      "developerName": "dompling",
+      "version": "sidestore-translator-settings-20261116-163605",
+      "versionDate": "2026-11-17",
+      "versionDescription": "修复设置二级页面大量英文：为 Text(StringProtocol) 和 LocalizedStringKey 字面量/String 初始化器添加原生 Swift 包装，使用仓库现有 litehook 仅重绑定 SideStoreApp.framework 导入，修复 dlopen 预加载时静态 interpose 不生效的问题。仍使用 2045 条语义审核译文。\n\n验证：12 项 JSON/提取测试；真实 SwiftUI 的 dlopen 双加载顺序、优化/非优化、上下文关闭、其他镜像排除、每次5000次文本创建均通过；arm64 iOS18.6模拟器启用/关闭验证通过；独立arm64 iOS15+编译通过。尚未进行手机上LC+SS整体真机验证，动态插值/内联verbatim等仍可能有遗漏。\n\n安装：替换 SideStoreTranslator.dylib，重新签名并完全重启LC，再打开内置SideStore。JSON已内嵌；若有外置zh-Hans.json覆盖则同时更新。检查status.json的swiftUITextBridgeHit:true确认新桥接命中。\n\n此包由本地工作区构建，含尚未提交至分支的修订；标签对应源码快照不包含这些本地修订。\n\nSHA-256:\n\nSideStoreTranslator.dylib: fb101c56f68be61afeb63d5591552adc9a1e721a9d8d6490199306b5990f290b\n\nzh-Hans.json: 5b4144e97f2eb6386cc3293e8fc0acfcb35dfa55538bae4f53a0bb9bea37d6ff\n",
+      "iconURL": "https://raw.githubusercontent.com/dompling/LC-SS-widget-export/main/screenshots/icon.png",
+      "localizedDescription": "导入 LiveContainer Tweaks 页 → 签名 → 全局注入生效",
+      "tweakScope": "global",
+      "installHint": "Tweaks 页导入 → 签名 → 绑定 App",
+      "assets": [
+        {
+          "name": "SideStoreTranslator.dylib",
+          "url": "https://github.com/dompling/LC-SS-widget-export/releases/download/sidestore-translator-settings-20261116-163605/SideStoreTranslator.dylib",
+          "size": 255984,
+          "updated_at": "2026-11-16T16:36:08Z"
+        }
+      ],
+      "tintColor": "#AF52DE"
+    }
+  ]
+}
